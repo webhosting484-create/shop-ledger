@@ -1,0 +1,49 @@
+You are a senior front-end engineer who ships small business software. Build a complete, working shop management app in ONE file, release quality, no placeholders or TODOs.
+
+=== CUSTOMISE (five lines, fits any shop) ===
+- SHOP: [SHOP: Rahman General Store, a neighbourhood grocery shop]
+- CURRENCY: [CURRENCY: symbol Tk, shown before the number, no decimals]
+- UI LANGUAGE: [LANGUAGE: English]
+- EXPENSE CATEGORIES: [EXPENSES: rent, electricity, transport, stock purchase, repairs, other]
+- STAFF ROLES: [ROLES: manager, salesman, helper, cleaner]
+=== END CUSTOMISE ===
+
+DELIVERABLE
+A single `index.html`, all HTML, CSS and JS inline. No build step, no npm, no frameworks, no CDN, no external fonts — icons are inline SVG. Opens by double-clicking, works offline. All UI text, month names included, in the UI LANGUAGE.
+
+DATA
+One `localStorage` key holds everything as JSON: sales, expenses, staff, salary payments, settings. Wrap reads and writes in try/catch and work from memory if storage is blocked. On first run seed three weeks of believable sample data so every screen and chart is full, with a dismissable banner and a "Clear everything" button that confirms in the page.
+
+SIX TABS — build every one
+1. DASHBOARD. Six tiles: today's sales, expenses and profit, this month's sales and profit, unpaid salaries this month. Each shows the figure and below it the change against yesterday or last month, coloured up or down. Then a 14-day SVG bar chart of daily sales with a y-axis, gridlines and a hover tooltip, and the last eight entries from every section.
+2. SALES. One row of fields: item with suggestions from past items, quantity, unit price, a live total, payment method (cash, card, due), Add. The day's list is newest first and updates at once, each row showing time, item, quantity, unit price, total, method and a delete button. A day picker moves between days and the footer total follows.
+3. EXPENSES. Category, amount, note, date, Add. Grouped by category with a subtotal each and a grand total for the chosen month.
+4. STAFF. Add a person: name, role, monthly salary, phone, joining date. Each card shows the person, the salary and whether this month is paid. "Pay salary" records a payment dated today and marks them paid, and the dashboard's unpaid figure drops at once. A history list shows every payment with its month.
+5. REPORTS. A month picker, then total sales, expenses, salaries paid and net profit. A table of every day with sales, expenses and profit per row, totals in the footer and the best and worst day marked. A bar chart of expenses by category. Buttons to export the month as CSV, back up as JSON and restore from JSON.
+
+6. SETTINGS, from the foot of the side menu. Edit the shop name and currency symbol, and manage the expense categories and staff roles as lists you can add to, rename or remove from. Changes save with the data and apply everywhere at once. A category or role in use cannot be removed, and the app says what is using it.
+
+RULES THAT MUST HOLD
+- Profit = sales − expenses − salaries paid in that period, defined the same way everywhere.
+- Money is whole-unit integers, never floating point. Format in one helper.
+- Zero or less, an empty item name or a missing category is refused beside that field, never an alert.
+- Deleting confirms in the page and can be undone for five seconds.
+- Dates are stored as YYYY-MM-DD, compared as strings, shown in the UI LANGUAGE. A day with no entries says what to add, not a blank panel.
+- Recompute totals from the data on every render, never from a running variable.
+
+INTERFACE
+- Sidebar on desktop with the shop name and the tab links, a bottom bar on phones for the first five, open tab marked aria-current.
+- Light and dark themes from CSS custom properties, toggled by a button that follows the system setting until the user chooses.
+- Tables scroll in their own container and stack into cards below 640px. Tap targets at least 44px.
+- Tabular figures. Negatives red and bracketed.
+- 320px to 2560px, no horizontal page scroll.
+- A print stylesheet so Reports prints on A4 as a statement, no sidebar or buttons.
+
+ACCESSIBILITY
+Semantic landmarks, one h1, a label on every input, visible focus rings, logical tab order. aria-live on changing totals and the undo bar. Charts carry a text summary. Body text contrast at least 4.5:1 in both themes. Honour prefers-reduced-motion.
+
+ROBUSTNESS
+No console errors or warnings on load, on resize or after exercising every control. Guard every querySelector. Validate restored JSON before replacing the data and refuse a bad file clearly. Handle a thousand rows without lag.
+
+BEFORE YOU FINISH
+Add a sale, an expense and a salary payment and confirm the dashboard, day total, month total and report row all move by the right amount. Delete one of each and confirm the figures go back. Rename a category in Settings and confirm every old entry follows. Check both themes, 320px, print and the console. Then output the complete `index.html` in one code block.
